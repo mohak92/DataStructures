@@ -188,13 +188,16 @@ public class SplayTree<T extends Comparable<T>> implements Tree<T> {
 	private void splay(Node<T> node) {
 
 		while (node.getParentNode() != null) {
-
+			
+			// ZIG situation
 			if (node.getParentNode().getParentNode() == null) {
 				if (node.getParentNode().getLeftNode() == node) {
 					rotateRight(node.getParentNode());
 				} else {
 					rotateLeft(node.getParentNode());
 				}
+				
+			// ZIG-ZAG situation
 			} else if (node.getParentNode().getLeftNode() == node
 					&& node.getParentNode().getParentNode().getLeftNode() == node.getParentNode()) {
 				rotateRight(node.getParentNode().getParentNode());
@@ -203,6 +206,8 @@ public class SplayTree<T extends Comparable<T>> implements Tree<T> {
 					&& node.getParentNode().getParentNode().getRightNode() == node.getParentNode()) {
 				rotateLeft(node.getParentNode().getParentNode());
 				rotateLeft(node.getParentNode());
+				
+			// ZIG-ZAG situation
 			} else if (node.getParentNode().getLeftNode() == node
 					&& node.getParentNode().getParentNode().getRightNode() == node.getParentNode()) {
 				rotateRight(node.getParentNode());

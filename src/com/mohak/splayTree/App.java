@@ -13,6 +13,8 @@ public class App {
 		splayTree.insert(-56);
 		splayTree.insert(78);
 
+		((SplayTree)splayTree).printRoot();
+		System.out.println(((SplayTree)splayTree).size());
 		splayTree.inOrderTraversal();
 	}
 
