@@ -8,10 +8,12 @@ public class App {
 		heap.insert(10);
 		heap.insert(100);
 		heap.insert(-10);
+		
+		System.out.println(heap.getMax()+"\n");
 
 		heap.heapsort();
 
-		System.out.println();
+		System.out.println("\n");
 		System.out.println(heap.getMax());
 	}
 

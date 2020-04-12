@@ -44,10 +44,17 @@ public class Heap {
 		
 	}
 	
+	//we return the root node. Because it is a max heap the root is the max item.
+	// of course because of array representation it takes O(1) time
+	//this is the peek() method
 	public int getMax() {
 		return this.heap[0];
 	}
 	
+	//it return the maximum item + removes it from the heap
+	//note: we do not care about the item any more but because
+	//we have an array with fix size we are not able to get rid of it completely
+	//O(logN)
 	public int poll() {
 		int max = getMax();
 		
@@ -59,12 +66,44 @@ public class Heap {
 		return max;
 	}
 	
+	//we have a given item in the heap and we consider all the item below and check
+	//whether the heap properties are violated or not
 	private void fixDown(int index) {
 		
+		//every node have children:left child and right child
+		//in the array the node i has left child with index 2*i+1 and the right child with index 2*i+2
+		int indexLeft = 2*index+1;
+		int indexRight = 2*index+2;
+		//max heap so parent node is always greater than the children
+		int indexLargest = index;
+		
+		//if the left child is greater than the parent: largest is the left node
+		if(indexLeft < heapSize && heap[indexLeft] > heap[index])
+			indexLargest = indexLeft;
+		
+		//if right child is greater than left child: largest is the right node
+		if(indexRight < heapSize && heap[indexRight] > heap[indexLargest])
+			indexLargest = indexRight;
+		
+		//we don not want to swap items with themselves
+		if(index != indexLargest) {
+			swap(index, indexLargest);
+			fixDown(indexLargest);
+		}
 	}
 
+	//we have n items and we want to sort them with a heap
+	//every poll operation takes O(logN) time because of the fixDown method thats why
+	//the overall running time complexity is O(NlogN) for heapsort
 	public void heapsort() {
 		
+		//we decrease the size of the heap in poll() method so we have to store it!!!
+		int size = this.heapSize;
+		
+		for(int i = 0; i < size; ++i) {
+			int max = poll();
+			System.out.print(max+" ");
+		}
 	}
 	
 	//swap two items with (index1, index2) in the heap array
@@ -77,7 +116,7 @@ public class Heap {
 	//check whether the heap is full or not
 	//note: we are not able to insert more items than the capacity
 	private boolean isHeapFull() {
-		return Constants.CAPACITY == this.heap.length;
+		return Constants.CAPACITY == this.heapSize;
 	}
 
 }
