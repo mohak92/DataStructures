@@ -1,5 +1,8 @@
 package com.mohak.Tries;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Trie {
 	
 	private Node root;
@@ -59,6 +62,35 @@ public class Trie {
 			}
 		}
 		return true;
+	}
+	
+	public List<String> allWordsWithPrefix(String prefix){
+		Node trieNode = root;
+		List<String> allWords = new ArrayList<>();
+		
+		for(int i = 0;i < prefix.length();++i) {
+			char c = prefix.charAt(i);
+			int asciiIndex = c-'a';
+			trieNode = trieNode.getChild(asciiIndex);
+		}
+		
+		collect(trieNode, prefix, allWords);
+		
+		return allWords;
+	}
+
+	private void collect(Node node, String prefix, List<String> allWords) {
+		if(node == null) return;
+		
+		if(node.isLeaf()) {
+			allWords.add(prefix);
+		}
+		
+		for(Node childNode : node.getChildren()) {
+			if(childNode == null) continue;
+			String childCharacter = childNode.getCharacter();
+			collect(childNode, prefix+childCharacter, allWords);
+		}
 	}
 
 }
