@@ -15,6 +15,11 @@ public class App {
 		trie.insert("newengland");
 		trie.insert("newamsterdam");
 		
+		System.out.println();
+		System.out.println("Longest common prefix is: " + trie.longestCommonPrefix());
+		
+		System.out.println();
+		
 		List<String> list = trie.allWordsWithPrefix("new");
 		for(String s : list) {
 			System.out.println(s);
@@ -34,6 +39,15 @@ public class App {
 		for(String s : list3) {
 			System.out.println(s);
 		}
+		
+		Trie trie2 = new Trie();
+		
+		trie2.insert("flower");
+		trie2.insert("flo");
+		trie2.insert("flight");
+		System.out.println();
+		System.out.println("Longest common prefix is: " + trie2.longestCommonPrefix());
+		
 	}
 
 }
