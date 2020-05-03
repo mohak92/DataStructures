@@ -6,6 +6,7 @@ public class Node {
 	private Node leftNode;
 	private Node middleNode;
 	private Node rightNode;
+	private int value;
 	
 	public Node(char character) {
 		this.character = character;
@@ -41,5 +42,13 @@ public class Node {
 
 	public void setRightNode(Node rightNode) {
 		this.rightNode = rightNode;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
 	}
 }
